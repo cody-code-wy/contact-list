@@ -28,8 +28,9 @@ class Cli
         puts args[0].to_sym
         @commands[args[0].to_sym].run if @commands.has_key? args[0].to_sym
       else
-        undefined args   
-      end
+        undefined args
+    end
+    puts "test"
   end
 
   def main_menu()
@@ -38,9 +39,18 @@ class Cli
       puts "  #{cmd.name}  -  #{cmd.help}"
     end
   end
-    
+
   def undefined(args)
 
+  end
+
+  class << self
+
+    def get_s(regex = /.*/)
+      input = gets.chomp.strip
+      return input if input.match(regex)
+      nil
+    end
   end
 
 end

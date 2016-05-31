@@ -1,5 +1,5 @@
 class Command
-  
+
   attr_reader :help
   attr_reader :name
 
