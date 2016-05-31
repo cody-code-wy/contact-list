@@ -70,10 +70,10 @@ class Contact
     def search(term)
       contacts = all()
       contacts.select do |contact|
-        contact.firstname.match(term) ||
-          contact.lastname.match(term) ||
-          contact.email.match(term) ||
-          contact.phonenumber.match(term)
+        contact.firstname.downcase.match(term) ||
+          contact.lastname.downcase.match(term) ||
+          contact.email.downcase.match(term) ||
+          contact.phonenumber.downcase.match(term)
       end
     end
 
@@ -81,5 +81,5 @@ class Contact
 
 end
 
-#byebug
-#puts '' # for byebug
+
+
