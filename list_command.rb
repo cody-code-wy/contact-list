@@ -6,9 +6,11 @@ class List < Command
   end
 
   def run(_)
+    out = ""
     contacts = Contact.all
     contacts.each do |contact|
-      puts "ID:#{contact.id}\n  #{contact.firstname} #{contact.lastname}"
+      out << "ID:#{contact.id}\n  #{contact.firstname} #{contact.lastname}"
+      out << "\n"
     end
   end
 end

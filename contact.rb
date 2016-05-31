@@ -1,5 +1,4 @@
 require 'csv'
-#require 'byebug'
 
 # Represents a person in an address book.
 # The ContactList class will work with Contact objects instead of interacting with the CSV file directly
@@ -21,7 +20,7 @@ class Contact
   end
 
   def to_s
-    puts "Contact ID:#{id}\n  #{firstname} #{lastname}\n    #{email}\n    #{phonenumber.gsub(/(\d{3})(\d{3})(\d{4})/,'\1-\2-\3')}"
+    "Contact ID:#{id}\n  #{firstname} #{lastname}\n    #{email}\n    #{phonenumber.gsub(/(\d{3})(\d{3})(\d{4})/,'\1-\2-\3')}"
   end
 
   def to_a
@@ -60,10 +59,9 @@ class Contact
     # @return [Contact, nil] the contact with the specified id. If no contact has the id, returns nil.
     def find(id)
       contacts = all()
-      contacts.each do |contact|
-        return contact if contact.id == id
+      contacts.detect do |contact|
+        contact.id == id
       end
-      return nil
     end
 
     # Search for contacts by either name or email.
