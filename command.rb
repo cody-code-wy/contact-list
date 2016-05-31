@@ -8,7 +8,7 @@ class Command
     @name = "Unnamed Command"
   end
 
-  def run
+  def run(_)
     puts "This command is not fully implemented, please update your application and try again"
   end
 

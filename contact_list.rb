@@ -3,6 +3,7 @@
 require_relative 'contact'
 require_relative 'command'
 require_relative 'list_command'
+require_relative 'new_command'
 
 # Interfaces between a user and their contact list. Reads from and writes to standard I/O.
 class ContactList
@@ -15,7 +16,8 @@ class Cli
 
   def initialize()
     @commands = {
-      list: List.new
+      list: List.new,
+      new: New.new
     }
   end
 
@@ -23,11 +25,10 @@ class Cli
     case args.length
       when 0
         main_menu
-      when 1
+      else
 #        byebug
         puts args[0].to_sym
-        @commands[args[0].to_sym].run if @commands.has_key? args[0].to_sym
-      else
+        return @commands[args[0].to_sym].run(args) if @commands.has_key? args[0].to_sym
         undefined args
     end
     puts "test"
@@ -47,7 +48,7 @@ class Cli
   class << self
 
     def get_s(regex = /.*/)
-      input = gets.chomp.strip
+      input = STDIN.gets.chomp.strip
       return input if input.match(regex)
       nil
     end
