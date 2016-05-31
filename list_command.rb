@@ -1,6 +1,7 @@
 class List < Command
 
   def initialize
+    super
     @name = "List"
     @help = "Lists all contacts"
   end

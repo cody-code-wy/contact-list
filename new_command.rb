@@ -1,6 +1,7 @@
 class New < Command
 
   def initialize
+    super
     @help = "Create new contact"
     @name = "New"
   end

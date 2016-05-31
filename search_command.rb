@@ -1,6 +1,7 @@
 class Search < Command
 
   def initialize
+    super
     @help = "Search over entire contact list"
     @name = "search"
   end

@@ -42,7 +42,7 @@ class Contact
 
     # Creates a new contact, adding it to the csv file, returning the new contact.
     def create(firstname,lastname,email,phonenumber)
-      contacts = all()
+      contacts = all
       next_id = contacts.reduce(0) do |id,contact|
         id = contact.id + 1 if contact.id >= id
         id
@@ -51,14 +51,14 @@ class Contact
       CSV.open("contacts.csv", 'w') do |csv|
         contacts.each { |to_add| csv << to_add.to_a }
       end
-
+      contacts.last
     end
 
     # Find the Contact in the 'contacts.csv' file with the matching id.
     # @param id [Integer] the contact id
     # @return [Contact, nil] the contact with the specified id. If no contact has the id, returns nil.
     def find(id)
-      contacts = all()
+      contacts = all
       contacts.detect do |contact|
         contact.id == id
       end
@@ -68,7 +68,7 @@ class Contact
     # @param term [String] the name fragment or email fragment to search for
     # @return [Array<Contact>] Array of Contact objects.
     def search(term)
-      contacts = all()
+      contacts = all
       contacts.select do |contact|
         contact.firstname.downcase.match(term) ||
           contact.lastname.downcase.match(term) ||

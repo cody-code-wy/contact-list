@@ -1,4 +1,4 @@
-
+#!/bin/which ruby
 
 require_relative 'contact'
 require_relative 'command'
@@ -7,9 +7,6 @@ require_relative 'new_command'
 require_relative 'show_command'
 require_relative 'search_command'
 # Interfaces between a user and their contact list. Reads from and writes to standard I/O.
-class ContactList
-
-end
 
 class Cli
 
@@ -23,13 +20,11 @@ class Cli
   end
 
   def run(args)
-    case args.length
-      when 0
-        main_menu
-      else
-
-        return puts @commands[args[0].to_sym].run(args) if @commands.has_key? args[0].to_sym
-        undefined args
+    if args.count == 0
+      main_menu
+    else
+      return puts @commands[args[0].to_sym].run(args) if @commands.has_key? args[0].to_sym
+      undefined args
     end
   end
 
@@ -55,4 +50,4 @@ class Cli
 
 end
 
-Cli.new.run(ARGV)
+Cli.new.run(ARGV) if $0 == __FILE__

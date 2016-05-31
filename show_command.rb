@@ -1,6 +1,7 @@
 class Show < Command
-  
+
   def initialize
+    super
     @help = "Shows the contact with the given id"
     @name = "Show"
   end
