@@ -45,7 +45,6 @@ class Cli
         puts "Please enter all #{key.to_s}"
         while true do
           input = get_input(command, key.to_s, value, true)
-          p input
           break unless input
           arry << input
         end
