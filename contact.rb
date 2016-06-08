@@ -23,11 +23,19 @@ class Contact
     @id = id
   end
 
+  def add_phone_number(number)
+    @phone_numbers << number if number.is_a? PhoneNumber
+  end
+
   def update()
 
     unless id
       raw = @@conn.exec("INSERT INTO contacts (first_name, last_name, email) VALUES ( $1, $2, $3 ) RETURNING id",[first_name, last_name,email])
       @id = raw[0]['id']
+      phone_numbers.each { |number| number.update }
+    else
+      @@conn.exec("UPDATE contacts SET first_name=$1, last_name=$2, email=$3 WHERE id=$4", [first_name, last_name, email, id])
+      phone_numbers.each { |number| number.update }
     end
     self
   end

@@ -17,8 +17,12 @@ class New < Command
   end
 
   def run(args)
-    puts "Adding #{firstname} #{lastname}..."
-    Contact.new(args['First Name: '][0],args['Last Name: '][0],args['Email Address: '][0],args['Phone Numbers']).update
+    contact = Contact.new(args['First Name: '][0],args['Last Name: '][0],args['Email Address: '][0]).update
+    phone_numbers = args['Phone Numbers'].map do |number|
+      PhoneNumber.new(number, contact.id)
+    end
+    phone_numbers.each { |number| contact.add_phone_number number }
+    contact.update
   end
 
 end

@@ -20,6 +20,8 @@ class PhoneNumber
 
     unless id
       @@conn.exec("INSERT INTO phone_numbers (phone_number, contact_id) VALUES ( $1, $2::int)",[phone_number,contact_id])
+    else
+      @@conn.exec("UPDATE phone_numbers SET phone_number=$1, contact_id=$2::int WHERE id=$3::int",[phone_number,contact_id,id])
     end
   end
 
