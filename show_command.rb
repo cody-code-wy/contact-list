@@ -8,7 +8,7 @@ class Show < Command
 
   def run(args)
     if args[1] && args[1].match(/^\d+$/)
-      return Contact.find(args[1].to_i)
+      return ContactFormatter.new(Contact.find(args[1].to_i)).long_format
     else
       return "You must provide a number\nfor example `show 1`"
     end

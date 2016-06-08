@@ -2,10 +2,12 @@ class Command
 
   attr_reader :help
   attr_reader :name
+  attr_reader :prompts
 
   def initialize
     @help = "This command has no help"
     @name = "Unnamed Command"
+    @prompts = nil
   end
 
   def run(_)

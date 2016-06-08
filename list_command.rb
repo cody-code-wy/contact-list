@@ -10,8 +10,9 @@ class List < Command
     out = ""
     contacts = Contact.all
     contacts.each do |contact|
-      out << "ID:#{contact.id}\n  #{contact.firstname} #{contact.lastname}"
-      out << "\n"
+      formatter = ContactFormatter.new(contact)
+      out << "#{formatter.short_format}\n"
     end
+    out
   end
 end
