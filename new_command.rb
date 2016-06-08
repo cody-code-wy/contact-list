@@ -1,4 +1,3 @@
-require 'byebug'
 class New < Command
 
   def initialize
@@ -18,7 +17,6 @@ class New < Command
   end
 
   def run(args)
-    byebug
     puts "Adding #{firstname} #{lastname}..."
     Contact.new(args['First Name: '][0],args['Last Name: '][0],args['Email Address: '][0],args['Phone Numbers']).update
   end
