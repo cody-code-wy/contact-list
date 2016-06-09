@@ -15,7 +15,7 @@ class Contact
   # Creates a new contact object
   # @param name [String] The contact's name
   # @param email [String] The contact's email address
-  def initialize(first_name, last_name, email, phone_numbers = [], id=nil)
+  def initialize(first_name, last_name, email, phone_numbers=[], id=nil)
     @first_name = first_name
     @last_name = last_name
     @email = email
@@ -65,7 +65,7 @@ class Contact
     # @param email [String] the contact's email
     # @param phone_numbers [Hash]={} the contact's phone numbers
     # @return [Contact] Contact created
-    def create(first_name, last_name, email, phone_numbers={})
+    def create(first_name, last_name, email, phone_numbers=[])
       Contact.new(first_name, last_name, email, phone_numbers).save
     end
 
