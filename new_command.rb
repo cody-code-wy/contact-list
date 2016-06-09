@@ -17,12 +17,12 @@ class New < Command
   end
 
   def run(args)
-    contact = Contact.new(args['First Name: '][0],args['Last Name: '][0],args['Email Address: '][0]).update
+    contact = Contact.create(args['First Name: '][0],args['Last Name: '][0],args['Email Address: '][0])
     phone_numbers = args['Phone Numbers'].map do |number|
       PhoneNumber.new(number, contact.id)
     end
     phone_numbers.each { |number| contact.add_phone_number number }
-    contact.update
+    ContactFormatter.new(contact.save).long_format
   end
 
 end

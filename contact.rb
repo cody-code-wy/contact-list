@@ -27,18 +27,25 @@ class Contact
     @phone_numbers << number if number.is_a? PhoneNumber
   end
 
-  def update()
+  def save()
 
     unless id
       raw = @@conn.exec("INSERT INTO contacts (first_name, last_name, email) VALUES ( $1, $2, $3 ) RETURNING id",[first_name, last_name,email])
       @id = raw[0]['id']
-      phone_numbers.each { |number| number.update }
+      phone_numbers.each { |number| number.save }
     else
       @@conn.exec("UPDATE contacts SET first_name=$1, last_name=$2, email=$3 WHERE id=$4", [first_name, last_name, email, id])
-      phone_numbers.each { |number| number.update }
+      phone_numbers.each { |number| number.save }
     end
     self
   end
+
+  def destroy
+    phone_numbers.each { |number| number.destroy }
+    @@conn.exec("DELETE FROM contacts WHERE id=$1",[id])
+    self
+  end
+
   # Provides functionality for managing contacts in the csv file.
   class << self
 
@@ -59,7 +66,7 @@ class Contact
     # @param phone_numbers [Hash]={} the contact's phone numbers
     # @return [Contact] Contact created
     def create(first_name, last_name, email, phone_numbers={})
-      Contact.new(first_name, last_name, email, phone_numbers).update
+      Contact.new(first_name, last_name, email, phone_numbers).save
     end
 
     # Find the Contact in the 'contacts.csv' file with the matching id.

@@ -8,6 +8,7 @@ require_relative 'show_command'
 require_relative 'search_command'
 require_relative 'contact_formatter'
 require_relative 'phone_number'
+require_relative 'destroy_command'
 # Interfaces between a user and their contact list. Reads from and writes to standard I/O.
 
 class Cli
@@ -17,7 +18,8 @@ class Cli
       list: List.new,
       new: New.new,
       show: Show.new,
-      search: Search.new
+      search: Search.new,
+      destroy: Destroy.new
     }
   end
 
